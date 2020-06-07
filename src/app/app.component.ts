@@ -5,7 +5,7 @@ import {
   ReadResource,
   ReadResourceSequence,
 } from "@knora/api";
-import { environment } from "src/environments/environment";
+import { environment } from "../environments/environment";
 
 @Component({
   selector: "gr-root",
