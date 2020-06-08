@@ -4,7 +4,8 @@ import {
   KnoraApiConnection,
   ReadResource,
   ReadResourceSequence,
-} from "@knora/api";
+  ApiResponseError,
+} from "@dasch-swiss/dsp-js";
 import { environment } from "../environments/environment";
 
 @Component({
@@ -33,12 +34,13 @@ export class AppComponent implements OnInit {
     `;
     this.query = gravsearchQueryRepresentations;
     console.log("gravsearchQuery: " + this.query);
-    this.knoraApiConnection.v2.search
-      .doExtendedSearch(this.query)
-      .subscribe((res: ReadResourceSequence) => {
+    this.knoraApiConnection.v2.search.doExtendedSearch(this.query).subscribe(
+      (res: ReadResourceSequence) => {
         console.log(res);
         this.searchResult = res.resources;
-      });
+      },
+      (error: ApiResponseError) => console.log("do I catch it?")
+    );
   }
 
   ngOnInit() {
